@@ -1,0 +1,22 @@
+name: Docker Container Analysis
+
+on: [workflow_dispatch]
+
+jobs:
+  docker-process-check:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Build Docker Image
+        run: docker build -t so-lab-image .
+        
+      - name: Run Container & Monitor
+        run: |
+          docker run -d --name mi-contenedor so-lab-image sh -c "sleep 30"
+          docker ps
+          sleep 2
+          docker stats mi-contenedor --no-stream
+          docker exec mi-contenedor uname -r
