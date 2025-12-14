@@ -1,0 +1,22 @@
+name: System Automation
+
+on: [workflow_dispatch]
+
+jobs:
+  run-scripts:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Execute Script
+        run: |
+          chmod +x scripts/automation.sh
+          ./scripts/automation.sh
+        env:
+          TIER: Production_Level_1
+          
+      - uses: actions/upload-artifact@v4
+        with:
+          name: automation-logs
+          path: reports/
