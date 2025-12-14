@@ -1,0 +1,26 @@
+name: Production Release
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy-simulation:
+    runs-on: ubuntu-latest
+    environment: production
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Build for Production
+        run: |
+          npm install
+          npm run build
+          echo "Build finalizado."
+          
+      - name: Simulate Deploy to Cloud
+        run: |
+          echo "Conectando a Vercel/Render..."
+          sleep 2
+          echo "Subiendo archivos..."
+          sleep 2
+          echo "Despliegue exitoso en https://mi-app-falsa.vercel.app"
