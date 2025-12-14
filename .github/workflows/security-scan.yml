@@ -1,0 +1,26 @@
+name: Security Scan
+
+on: [push, workflow_dispatch]
+
+jobs:
+  security-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          
+      - name: Install dependencies
+        run: npm install
+        
+      - name: Check Vulnerabilities (NPM Audit)
+        # Fallará solo si hay vulnerabilidades críticas, si no, pasa
+        run: npm audit --audit-level=critical
+        
+      - name: Check File Permissions
+        run: |
+          echo "Analizando permisos de archivos sensibles..."
+          ls -l src/
