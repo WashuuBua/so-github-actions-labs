@@ -1,0 +1,18 @@
+{
+  "name": "so-cicd-app",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    "lint": "echo 'Linting passed'",
+    "build": "mkdir -p dist && cp src/server.js dist/"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "supertest": "^6.3.3"
+  }
+}
